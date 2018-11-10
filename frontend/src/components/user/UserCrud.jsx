@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Main from '../template/Main'
+import Table from './Table'
+import TableRow from './TableRow'
 
 const headerProps = {
   icon: 'users',
@@ -56,7 +58,6 @@ export default class UserCrud extends Component {
   }
 
   updateField = (e) => {
-    // console.log(e)
     const user = { ...this.state.user }
     user[e.target.name] = e.target.value
     this.setState({
@@ -124,35 +125,11 @@ export default class UserCrud extends Component {
   }
 
   renderTable = () => (
-    <table className="table mt-4">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nome</th>
-          <th>E-mail</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        {this.renderRows()}
-      </tbody>
-    </table>
+    <Table renderRows={this.renderRows} />
   )
 
   renderRows = () => this.state.list.map(user => (
-    <tr key={user.id}>
-      <td>{user.id}</td>
-      <td>{user.name}</td>
-      <td>{user.email}</td>
-      <td className="d-flex justify-content-center align-items-center">
-        <button className="btn btn-warning" onClick={() => this.load(user)}>
-          <i className="fa fa-pencil"></i>
-        </button>
-        <button className="btn btn-danger ml-2" onClick={() => this.remove(user)}>
-          <i className="fa fa-trash"></i>
-        </button>
-      </td>
-    </tr>
+    <TableRow user={user} load={this.load} remove={this.remove} />
   ))
 
   render() {
