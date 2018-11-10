@@ -1,18 +1,15 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import NavLink from './NavLink'
 
 import './Nav.css'
 
 export default props => (
   <aside className="menu-area">
     <nav className="menu">
-      {/* Refatorar!!! */}
-      <Link to="/">
-        <i className="fa fa-home"></i> Início
-      </Link>
-      <Link to="/users">
-        <i className="fa fa-users"></i> Usuários
-      </Link>
+      <ul>
+        <NavLink to="/" icon="home" name="Início" />
+        <NavLink to="/users" icon="users" name="Usuários" />
+      </ul>
     </nav>
   </aside>
 )
